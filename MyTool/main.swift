@@ -84,3 +84,50 @@ case "Saturday", "Sunday":
 default:
     #""\#(dayOfWeek)" is invalid day of the week!"#
 }
+
+print(message)
+
+// Switch
+func positionDescription(point: (x: Int, y: Int)) -> String {
+    switch point {
+    case (0, 0):
+        "\(point) is at the origin"
+    case (_, 0):
+        "\(point) is on the x-axis"
+    case (0, _):
+        "\(point) is on the y-axis"
+    case (0..., 0...):
+        "\(point) is in the first quadrant"
+    case (...0, 0...):
+        "\(point) is in the second quadrant"
+    case (...0, ...0):
+        "\(point) is in the third quadrant"
+    case (0..., ...0):
+        "\(point) is in the fourth quadrant"
+    default:
+        "\(point) is at an unknown position"
+    }
+}
+
+print("\n\npositionDescription example – Switch with tuples and ranges")
+print(positionDescription(point: (2, 2)))
+print(positionDescription(point: (-5, 2)))
+print(positionDescription(point: (-5, -3)))
+print(positionDescription(point: (5, -3)))
+print(positionDescription(point: (0, 0)))
+print(positionDescription(point: (0, 4)))
+print(positionDescription(point: (3, 0)))
+
+func onSineOrCosine(point: (x: Double, y: Double), threshold: Double = 0.01) -> String {
+    switch point {
+    case let (x, y) where (y <= sin(x) + threshold && y >= sin(x) - threshold) || (y <= cos(x) + threshold && y >= cos(x) - threshold):
+        "\(point) is on sine, cosine, or both"
+    default:
+        "\(point) is NOT on sine or cosine"
+    }
+}
+
+print(onSineOrCosine(point: (5, sin(5))))
+print(onSineOrCosine(point: (71, cos(71))))
+print(onSineOrCosine(point: (71, -0.30902272816607)))
+print(onSineOrCosine(point: (71, -0.30902272816607), threshold: 0.0000000000000000001))
